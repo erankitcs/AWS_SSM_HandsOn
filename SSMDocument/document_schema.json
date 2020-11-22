@@ -1,0 +1,30 @@
+{
+    "schemaVersion": "2.2",
+    "description": "Command Document Example JSON Template",
+    "parameters": {
+      "Packages": {
+        "type": "String",
+        "description": "MySQL package",
+        "default": "mariadb-server"
+      },
+      "Password": {
+        "type": "String",
+        "description": "MySQL Password",
+        "default": "{{ ssm:mysql-pass }}"
+      }
+    },
+    "mainSteps": [
+      {
+        "action": "aws:runShellScript",
+        "name": "Install_Configure_MariaDB",
+        "inputs": {
+          "runCommand": [
+            "yum -y install {{ Packages }}",
+            "systemctl start mariadb",
+            "sleep 5;mysqladmin password {{ Password }};",
+            "mysql -uroot -p{{ Password }} -e 'show databases;' > /root/db_output.txt"
+          ]
+        }
+      }
+    ]
+  }
