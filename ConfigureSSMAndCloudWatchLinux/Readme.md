@@ -74,9 +74,13 @@ or
 
 - Create AWS IAM Role with permission `CloudWatchAgentServerRole`
 
-- Now, Create agent configuration file
+- Now, Create agent configuration file. You can use sample `/opt/aws/amazon-cloudwatch-agent/doc/amazon-cloudwatch-agent-schema.json` or create a new one using `cloudwatchconfigfile.json`
 
 `sudo cp /opt/aws/amazon-cloudwatch-agent/doc/amazon-cloudwatch-agent-schema.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json`
+
+or 
+
+`sudo vi /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json` and copy content from `cloudwatchconfigfile.json`
 
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 
